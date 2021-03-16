@@ -1,7 +1,5 @@
 <template>
-  <section
-    :class="{ white: switchHover, dark: !switchHover }"
-    class="row with-or-without-us"
+  <section :class="{ white: switchHover, dark: !switchHover }" class="row with-or-without-us"
   >
     <div class="dare-to-switch">
       <h2 :class="{ white: switchHover, dark: !switchHover }" class="dare">
@@ -12,8 +10,41 @@
         <span class="slider round" @click="toggle" />
       </label>
     </div>
-
-    <div v-if="currentSwitchState === 'without'">
+    <div v-if="currentSwitchState">
+      <div class="row with-us">
+        <div class="sunny">
+          <div class="sunshine-icon">
+            <img
+              alt="With Us sunshine icon"
+            >
+          </div>
+          <div class="statement-wrapper">
+            <div class="immutable-top">
+              {{ titleTopPart }}
+            </div>
+            <div class="mutable-bottom">
+              {{ titleBottomPartWith }}
+            </div>
+          </div>
+        </div>
+        <div class="with-bullets">
+          <div v-for="explanation in explainedWith" :key="explanation.id">
+            <div class="check-with-text">
+              <div class="check">
+                <s-image
+                  :image="explanation.iconCheck"
+                  :alt="explanation.iconCheckAlt"
+                />
+              </div>
+              <div class="more-details">
+                {{ explanation.description }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    <div v-else>
       <div class="row without-us">
         <div class="cloudy">
           <div class="cloudy-icon">
@@ -49,39 +80,7 @@
         </div>
       </div>
     </div>
-    <div v-else-if="currentSwitchState === 'with'">
-      <div class="row with-us">
-        <div class="sunny">
-          <div class="sunshine-icon">
-            <img
-              alt="With Us sunshine icon"
-            >
-          </div>
-          <div class="statement-wrapper">
-            <div class="immutable-top">
-              {{ titleTopPart }}
-            </div>
-            <div class="mutable-bottom">
-              {{ titleBottomPartWith }}
-            </div>
-          </div>
-        </div>
-        <div class="with-bullets">
-          <div v-for="explanation in explainedWith" :key="explanation.id">
-            <div class="check-with-text">
-              <div class="check">
-                <s-image
-                  :image="explanation.iconCheck"
-                  :alt="explanation.iconCheckAlt"
-                />
-              </div>
-              <div class="more-details">
-                {{ explanation.description }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   </section>
 </template>
@@ -100,20 +99,20 @@ export default {
   data() {
     return {
       switchHover: false,
-      withOrWithout: 'without'
+      switchedOn: false
     }
   },
   computed: {
     currentSwitchState() {
       if (this.switchHover === false) {
-        return 'without'
+        return false
       } else {
-        return 'with'
+        return true
       }
     }
   },
   mounted() {
-    this.withOrWithout = 'without'
+    this.switchedOn = false
   },
   methods: {
     toggle() {
