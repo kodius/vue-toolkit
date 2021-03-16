@@ -73,8 +73,6 @@
                 <s-image
                   :image="explanation.iconCheck"
                   :alt="explanation.iconCheckAlt"
-                  width="35"
-                  height="35"
                 />
               </div>
               <div class="more-details">
