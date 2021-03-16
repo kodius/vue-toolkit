@@ -1,6 +1,10 @@
 {
   "name": "@kodius/toggle-screen",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:kodius/vue-toolkit.git"
+  },
   "publishConfig": {
     "access": "public"
   }
